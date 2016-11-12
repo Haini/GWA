@@ -96,37 +96,105 @@
 
 \pagestyle{plain} %Now display headings: headings / fancy / ...
 
-\title{\Large Title}
+\title{\Large Extended Abstract on Mobile Robotics}
 
-\author{\large N.N., Technische Universität Wien}
-\date{} %%If commented, the current date is used.
+\author{\large Constantin Schieber, 1228774, Technische Universitï¿½t Wien}
+%\date{} %%If commented, the current date is used.
 
 \maketitle
 
-\begin{abstract}
+\begin{section}{Introduction and problem statement}
 
-Lorem ipsum dolor sit amet, consetetur, adipisci velit, \dots
+Detecting and tracking people on a mobile robotic platform with real time
+requirements and hardware constraints is an upcomming issue.
+Knowing the positions of people over time is important for many applications that
+focus on human - robot interaction, e.g. autonomously following a person.
 
-\end{abstract}
-
-\begin{section}{Introduction}
-
-Lorem ipsum dolor sit amet~\cite{dunkels2004contiki}, consetetur, adipisci velit, \dots
-
-\end{section}
-
-\begin{section}{...}
+The following work summarizes five papers on this topic to introduce the 
+available hardware / algorithms and its utilization for people tracking.
 
 \end{section}
 
-\begin{section}{Conclusion}
+\begin{section}{Short summary of the Papers to Investigate}
 
-Lorem ipsum dolor sit amet~\cite{5342399}, consetetur, adipisci velit, \dots
+\begin{subsection}{OpenPTrack}
+The first paper ~\cite{munaro2014openptrack} introduces OpenPTrack. OpenPTrack
+is a framework built with the Robotic Operating System (ROS) and enables the user
+to utilize and calibrate a network of multiple RGB-D cameras. Detection of people
+happens in a distributed fashion while the tracking is done in a single node that
+processes all detections from the network.
+\end{subsection}
 
+\begin{subsection}{Person Tracking and Following with 2D Laser Scanners}
+In this paper ~\cite{7139259} an approach that utilizes depth sensors - such as
+laser or RGB-D - for sensing its surroundings is introduced. The implementation
+is provided as open source ROS package which can be used with any depth sensing
+based hardware on a height of 30cm. A retraining of the human-confidence 
+learning algorithm may be necessary when different sensor resolutions are used.\\
+
+Detection and tracking works with moving and non-moving persons in cluttered 
+enviroments. It is independet of light conditions, works in close proximity
+to the tracked person and does not need an \textit{a priori} occupancy grid map 
+of the surroundings.
+
+%The work is subsequently splitted into three sub-problems that are (1) detection,
+%(2) tracking and (3) following.
+%It moving and
+%non-moving targets in cluttered enviroments without requiring an \texit{a priori}
+%occupancy grid map of the enviroment.
+%
+%Measuerement takes place on a height of 30cm, which means that mostly the legs
+%are tracked. The points returned from the distance measurement of the laser are
+%then assigned to clusters that will. Assigning is based on a treshhold that will
+%put a persons legs most of the time in two distinct clusters.
+%Clusters will then be classified as human and non-human on basis of geometric
+%features. 
+%
+%Laser sensing is light invariant and has a wide wide field of view - making it
+%suitable for tracking in close proximity to a person and outdoor tasks.
+%
+%
+%The research is open source and provided as a ROS package.
+ 
+\end{subsection}
+
+\begin{subsection}{Computationally Intelligent System for Thermal Vision People
+Detection and Tracking in Robotic Applications}
+This work ~\cite{ciric2013computationally} uses thermal vision and ultrasonic
+sensors. 
+It uses the distinct thermal profile of people to detect and track them. This is
+independet of light conditions.
+Aquiring the position of a human in an thermal image is realized by segmentating
+the image in Regions Of Interests (ROIs). Data of the thermal sensor 
+represents differences in the thermal energy of objects in an enviroment.
+Thresholding this data then allows to extract segments of interest. 
+As most thermal image segmentation algorithms fail to provide real time perfomance
+a new algorithm is introduced.\\
+Utilizing fuzzy membership functions that determine how strongly a RGB color 
+belongs to the fore- or background it is possible to have a fast and reliable
+segmentation algorithm. Applying such fuzzy logic on RGB color instead of greyscale
+images provides much better results. A disadvantage is that this method won't yield
+good results in situations where more precise tracking is required, e.g. 
+for body joints.\\
+A neuro-fuzzy classifier then determines if a segment is human or not.\\
+This approach provides fast and reliable tracking of one person.
+It is able to detect and track multiple persons but - depending on the interactions
+between these people - loses track easily.
+
+
+\end{subsection}
+
+
+\begin{subsection}{4}
+\end{subsection}
+
+\begin{subsection}{5}
+\end{subsection}
 
 \end{section}
 
-\bibliographystyle{IEEEtran}
+
 \bibliography{references}
+\bibliographystyle{IEEEtran}
 
 \end{document}

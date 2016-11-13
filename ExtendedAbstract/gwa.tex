@@ -98,7 +98,7 @@
 
 \title{\Large Extended Abstract on Mobile Robotics}
 
-\author{\large Constantin Schieber, 1228774, Technische Universit�t Wien}
+\author{\large Constantin Schieber, 1228774, Technische Universitaet Wien}
 %\date{} %%If commented, the current date is used.
 
 \maketitle
@@ -106,7 +106,7 @@
 \begin{section}{Introduction and problem statement}
 
 Detecting and tracking people on a mobile robotic platform with real time
-requirements and hardware constraints is an upcomming issue.
+requirements and hardware constraints is an upcoming issue.
 Knowing the positions of people over time is important for many applications that
 focus on human - robot interaction, e.g. autonomously following a person.
 
@@ -117,15 +117,19 @@ available hardware / algorithms and its utilization for people tracking.
 
 \begin{section}{Short summary of the Papers to Investigate}
 
-\begin{subsection}{OpenPTrack}
+\paragraph{OpenPTrack}\mbox{} \\
 The first paper ~\cite{munaro2014openptrack} introduces OpenPTrack. OpenPTrack
 is a framework built with the Robotic Operating System (ROS) and enables the user
 to utilize and calibrate a network of multiple RGB-D cameras. Detection of people
 happens in a distributed fashion while the tracking is done in a single node that
-processes all detections from the network.
-\end{subsection}
+processes all detection from the network.\\
+The relative position of the cameras to each other can be easily calibrated using 
+a checkerboard and real-time visual feedback from the ROS application.\\
+Real-time tracking perfomance of groups is achieved under most light conditions
+due to the usage of different sensor readings (depth, infrared, color). 
 
-\begin{subsection}{Person Tracking and Following with 2D Laser Scanners}
+\paragraph{Person Tracking and Following with 2D Laser Scanners}
+\mbox{} \\
 In this paper ~\cite{7139259} an approach that utilizes depth sensors - such as
 laser or RGB-D - for sensing its surroundings is introduced. The implementation
 is provided as open source ROS package which can be used with any depth sensing
@@ -133,9 +137,11 @@ based hardware on a height of 30cm. A retraining of the human-confidence
 learning algorithm may be necessary when different sensor resolutions are used.\\
 
 Detection and tracking works with moving and non-moving persons in cluttered 
-enviroments. It is independet of light conditions, works in close proximity
+environments. It is independent of light conditions, works in close proximity
 to the tracked person and does not need an \textit{a priori} occupancy grid map 
-of the surroundings.
+of the surroundings. Depending on the used laser noise from the sun can be a 
+problem.
+A joint leg tracker is used instead of tracking individual legs.
 
 %The work is subsequently splitted into three sub-problems that are (1) detection,
 %(2) tracking and (3) following.
@@ -156,19 +162,18 @@ of the surroundings.
 %
 %The research is open source and provided as a ROS package.
  
-\end{subsection}
 
-\begin{subsection}{Computationally Intelligent System for Thermal Vision People
-Detection and Tracking in Robotic Applications}
+\paragraph{Thermal vision based approach}
+\mbox{} \\
 This work ~\cite{ciric2013computationally} uses thermal vision and ultrasonic
 sensors. 
 It uses the distinct thermal profile of people to detect and track them. This is
-independet of light conditions.
-Aquiring the position of a human in an thermal image is realized by segmentating
+independent of light conditions.
+Acquiring the position of a human in an thermal image is realized by segmenting
 the image in Regions Of Interests (ROIs). Data of the thermal sensor 
-represents differences in the thermal energy of objects in an enviroment.
+represents differences in the thermal energy of objects in an environment.
 Thresholding this data then allows to extract segments of interest. 
-As most thermal image segmentation algorithms fail to provide real time perfomance
+As most thermal image segmentation algorithms fail to provide real time performance
 a new algorithm is introduced.\\
 Utilizing fuzzy membership functions that determine how strongly a RGB color 
 belongs to the fore- or background it is possible to have a fast and reliable
@@ -182,14 +187,47 @@ It is able to detect and track multiple persons but - depending on the interacti
 between these people - loses track easily.
 
 
-\end{subsection}
+
+\paragraph{Ultrasonic Sensor based approach}
+\mbox{} \\
+The authors of this paper ~\cite{7064565} propose an ultrasonic/RF sensor 
+based approach for single person tracking scenarios.
+This system works well under any light conditions and provides good performance
+in scenarios with terrain variations. 
+ROS nodes are used for measurement and control tasks. A drawback is that the 
+tracked person needs to carry an active sonar emitter.
+\\
+The sensor array on the robot is passive. A RF signal is sent to the robot,
+indicating the start of emitting ultrasonic pressure waves from the tracked person.
+The robot then measures the time of flight (ToF) and calculates the position
+of the person from this data. Due to high noise, non-linear behavior and the
+constant delay of the RF transmission triangulation based on this data is not
+sufficient for people tracking. A Gaussian Process Regression (GPR) model of the
+sensors is the novel approach of the authors to overcome this problem.
+This system is then trained in a controlled setup to determine the likelihood
+of measuring a given sonar signal at a certain location. A MATLAB-ROS Bridge is
+used for this training.\\
+Experiments show that this work is improving person tracking with ultrasonic/RF sensors
+in a significant way, making it usable for systematic person tracking in a
+outdoor setting with varying terrain.
 
 
-\begin{subsection}{4}
-\end{subsection}
-
-\begin{subsection}{5}
-\end{subsection}
+\paragraph{Human robot spatial interaction}
+\mbox{} \\
+With the advance of robust people tracking implementations another aspect is 
+becoming more important: Socially acceptable behavior of robot movement. That
+means to not only treat humans as dynamic obstacles but to navigate around them
+in a "natural" way.\\
+This paper ~\cite{dondrup2015tracker} attempts to model such interactions and 
+provides a processing pipeline implemented with ROS. It uses a 
+combination of upper body and leg detection. Tracking and predicting movement of
+people is achieved with a probabilistic real-time tracking framework.
+Qualitative Spatial Relations (QSR) are derived from the movement of tracked
+persons. This is done with Qualitative Trajectory Calculus (QTC). 
+QTC state chains can be created and classified using a Hidden Markovchain Model (HMM)
+that was set up in advance. For a distinct behavior a distinct HMM is trained.\\
+It is shown that various QTC-based scenarios (e.g. overtaking, pass by) are 
+significantly different from each other.\\
 
 \end{section}
 

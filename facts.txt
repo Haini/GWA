@@ -1,0 +1,16 @@
+--- Abstract ---
+Short summary of the paper
+    - Which informations can be expected? 
+    - Problemstatement (!)
+    - Actual contribution of described work (!)
+    - One paragraph
+    - 70 to 120 words
+
+--- Introduction ---
+Three paragraphs    
+    - Background of the work, relevance, problem statement
+    - Objective of the paper
+    - Structure of the paper
+
+
+
